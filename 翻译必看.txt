@@ -1,4 +1,4 @@
-﻿请各位同学翻译前先将自己准备翻译的页面在这里登记一下，以免大家同时翻译同一个，浪费了大家宝贵的时间
+请各位同学翻译前先将自己准备翻译的页面在这里登记一下，以免大家同时翻译同一个，浪费了大家宝贵的时间
 翻译完成后及时修改状态，状态有 翻译中/翻译完成/已更新 
 
 备注格式如下:
@@ -12,7 +12,7 @@
 /commands/set的余下命令        breakwang  2013-12-04    已更新 
 /topics/data-types.html        jerrypy    2013-12-01   翻译完成
 /topics/config.html            skywalker  2013-12-04  翻译中
-/topics/persistence.html       breakwang  2013-12-09  翻译完成
+/topics/persistence.html       breakwang  2013-12-09     已更新
 /commands/persist.html          阿昊      2013-12-16     已更新
 /commands/pexpire.html          阿昊      2013-12-16     已更新
 /commands/pexpireat.html        阿昊      2013-12-16     已更新
@@ -21,3 +21,5 @@
 /commands/restore.html          阿昊      2013-12-16     已更新
 /commands/ttl.html              阿昊      2013-12-16     已更新
 /commands/type.html             阿昊      2013-12-16     已更新
+/topics/sentinel.html		  breakwang   2014-01-06     翻译中
+
