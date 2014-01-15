@@ -30,31 +30,24 @@
           <p><strong>时间复杂度：</strong> O(1)。</p>
         </div>
         
-        <p>Insert all the specified values at the tail of the list stored at <code>key</code>.
-        If <code>key</code> does not exist, it is created as empty list before performing the push
-        operation.
-        When <code>key</code> holds a value that is not a list, an error is returned.</p>
+		<p>向存于 <code>key</code> 的列表的尾部插入所有指定的值。如果 <code>key</code> 不存在，那么会创建一个空的列表然后再进行 push 操作。
+		当 <code>key</code> 保存的不是一个列表，那么会返回一个错误。</p>
         
-        <p>It is possible to push multiple elements using a single command call just
-        specifying multiple arguments at the end of the command.
-        Elements are inserted one after the other to the tail of the list, from the
-        leftmost element to the rightmost element.
-        So for instance the command <code>RPUSH mylist a b c</code> will result into a list
-        containing <code>a</code> as first element, <code>b</code> as second element and <code>c</code> as third element.</p>
+	<p>可以使用一个命令把多个元素打入队列，只需要在命令后面指定多个参数。元素是从左到右一个接一个从列表尾部插入。
+	比如命令 <code>RPUSH mylist a b c</code> 会返回一个列表，其第一个元素是 <code>a</code> ，第二个元素是 <code>b</code> ，第三个元素是 <code>c</code>。</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#integer-reply">Integer reply</a>: the length of the list after the push operation.</p>
+        <p><a href="/topics/protocol.html#integer-reply">整型回复</a>: 在 push 操作后的列表长度。</p>
         
-        <h2>History</h2>
+        <h2>历史</h2>
         
         <ul>
-        <li><code>&gt;= 2.4</code>: Accepts multiple <code>value</code> arguments.
-        In Redis versions older than 2.4 it was possible to push a single value per
-        command.</li>
+        <li><code>&gt;= 2.4</code>: 接受多个 <code>value</code> 参数。
+	在老于 2.4 的 Redis 版本中，一条命令只能 push 单一个值。</li>
         </ul>
         
-        <h2>Examples</h2>
+        <h2>例子</h2>
         
         <div class='example' data-session='eed852b0b2dd9e1319d509d544e487f2'>
           <span class='monospace prompt'>redis&gt;&nbsp;</span>
