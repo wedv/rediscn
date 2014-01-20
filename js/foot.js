@@ -7,26 +7,19 @@ footHTML += '        联系Email:<a href="mailto:admin@redis.cn">admin@redis.cn<
 footHTML += "<scr";
 footHTML += "ipt src='http://s22.cnzz.com/stat.php?id=3593514&web_id=3593514' langu";
 footHTML += "age='JavaScript'></scr";
-footHTML += "ipt>";
+footHTML += "ipt><br/>";
+footHTML += '<span class="jiathis_txt">分享到：</span>';
+footHTML += '<a class="jiathis_button_tools_1"></a>&nbsp;&nbsp;';
+footHTML += '<a class="jiathis_button_tools_2"></a>&nbsp;&nbsp;';
+footHTML += '<a class="jiathis_button_tools_3"></a>&nbsp;&nbsp;';
+footHTML += '<a class="jiathis_button_tools_4"></a>&nbsp;&nbsp;';
+footHTML += '<a href="http://www.jiathis.com/share?uid=1875726" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>&nbsp;&nbsp;';
+footHTML += '<a class="jiathis_counter_style"></a>';
 footHTML += '      </div>';
 footHTML += '    </footer>';
 	
 // 分享插件	
-var jiathis_config = {data_track_clickback:'true'
-	,slide:{
-		divid:'jiathis_main',
-		pos:'right'
-	}
-};
-footHTML += '<div class="jiathis_share_slide jiathis_share_24x24" id="jiathis_share_slide">';
-footHTML += '<div class="jiathis_share_slide_top" id="jiathis_share_title"></div>';
-footHTML += '<div class="jiathis_share_slide_inner">';
-footHTML += '<div class="jiathis_style_24x24">';
-footHTML += '<a class="jiathis_button_qzone"></a>';
-footHTML += '<a class="jiathis_button_tsina"></a>';
-footHTML += '<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>';
-footHTML += '<scr'+'ipt type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1875726" charset="utf-8"></scr'+'ipt>	';
-footHTML += '<scr'+'ipt type="text/javascript" src="http://v3.jiathis.com/code/jiathis_slide.js" charset="utf-8"></scr'+'ipt>';
-footHTML += '</div></div></div>';
+var jiathis_config = {data_track_clickback:'true'};
+footHTML += '<scr'+'ipt type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1875726" charset="utf-8"></scr'+'ipt>';
 
 document.write(footHTML);
