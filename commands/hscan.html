@@ -21,51 +21,7 @@
         <span id='command_args_span' class='arg'></span>
       </h1>
       <article>
-      	<aside>
-        	<script type='text/javascript'>showCmdURL();</script>
-        </aside>
-        
-        <div class='metadata'>
-          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-          <p><strong>时间复杂度：</strong> O(1)。</p>
-        </div>
-        
-        <p>返回 key 所储存的值的类型。</p>
-        
-        <h2>返回值</h2>
-        
-        <p>none (key不存在)</p>
-        <p>string (字符串)</p>
-        <p>list (列表)</p>
-        <p>set (集合)</p>
-        <p>zset (有序集)</p>
-        <p>hash (哈希表)</p>
-        
-        <h2>Examples</h2>
-        
-        <div class='example' data-session='3807bd742b80da683b1693509879c3f5'>
-          <span class='monospace prompt'>redis&gt;&nbsp;</span>
-          <span class='monospace command'>SET key1 &quot;value&quot;</span>
-          <pre>OK</pre>
-          <span class='monospace prompt'>redis&gt;&nbsp;</span>
-          <span class='monospace command'>LPUSH key2 &quot;value&quot;</span>
-          <pre>(integer) 1</pre>
-          <span class='monospace prompt'>redis&gt;&nbsp;</span>
-          <span class='monospace command'>SADD key3 &quot;value&quot;</span>
-          <pre>(integer) 1</pre>
-          <span class='monospace prompt'>redis&gt;&nbsp;</span>
-          <span class='monospace command'>TYPE key1</span>
-          <pre>string</pre>
-          <span class='monospace prompt'>redis&gt;&nbsp;</span>
-          <span class='monospace command'>TYPE key2</span>
-          <pre>list</pre>
-          <span class='monospace prompt'>redis&gt;&nbsp;</span>
-          <span class='monospace command'>TYPE key3</span>
-          <pre>set</pre><form>
-            <span class='monospace prompt'>redis&gt;&nbsp;</span>
-            <input autocomplete='off' name='command' spellcheck='false' type='text' />
-          </form></div>
-        
+      	<p>See <a href="/commands/scan">SCAN</a> for <a href="/commands/hscan">HSCAN</a> documentation.</p>
       </article>
     </div>
     
