@@ -30,26 +30,22 @@
           <p><strong>时间复杂度：</strong> O(1)。</p>
         </div>
         
-        <p>Atomically returns and removes the last element (tail) of the list stored at
-        <code>source</code>, and pushes the element at the first element (head) of the list stored
-        at <code>destination</code>.</p>
+        <p>原子性地返回并移除存储在 <code>source</code> 的列表的最后一个元素（列表尾部元素），
+        并把该元素放入存储在 <code>destination</code> 的列表的第一个元素位置（列表头部）。</p>
         
-        <p>For example: consider <code>source</code> holding the list <code>a,b,c</code>, and <code>destination</code>
-        holding the list <code>x,y,z</code>.
-        Executing <a href="/commands/rpoplpush.html">RPOPLPUSH</a> results in <code>source</code> holding <code>a,b</code> and <code>destination</code>
-        holding <code>c,x,y,z</code>.</p>
+        <p>例如：假设 <code>source</code> 存储着列表 <code>a,b,c</code>， <code>destination</code>存储着列表 <code>x,y,z</code>。
+        执行 <a href="/commands/rpoplpush.html">RPOPLPUSH</a> 得到的结果是 <code>source</code> 保存着列表 <code>a,b</code> ，而
+         <code>destination</code> 保存着列表 <code>c,x,y,z</code>。</p>
         
-        <p>If <code>source</code> does not exist, the value <code>nil</code> is returned and no operation is
-        performed.
-        If <code>source</code> and <code>destination</code> are the same, the operation is equivalent to
-        removing the last element from the list and pushing it as first element of the
-        list, so it can be considered as a list rotation command.</p>
+        <p>如果 <code>source</code> 不存在，那么会返回 <code>nil</code> 值，并且不会执行任何操作。
+        如果 <code>source</code> 和 <code>destination</code> 是同样的，那么这个操作等同于移除列表最后一个元素并且把该元素放在列表头部，
+        所以这个命令也可以当作是一个旋转列表的命令。</p>
         
-        <h2>Return value</h2>
+        <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#bulk-reply">Bulk reply</a>: the element being popped and pushed.</p>
+        <p><a href="/topics/protocol.html#bulk-reply">批量回复</a>: 被移除和放入的元素</p>
         
-        <h2>Examples</h2>
+        <h2>例子</h2>
         
         <div class='example' data-session='e5571c96bffba603e58538bfc6b20ad7'>
           <span class='monospace prompt'>redis&gt;&nbsp;</span>
@@ -75,50 +71,37 @@
           </form></div>
         
         
-        <h2>Pattern: Reliable queue</h2>
+        <h2>模式：安全的队列</h2>
         
-        <p>Redis is often used as a messaging server to implement processing of background
-        jobs or other kinds of messaging tasks.
-        A simple form of queue is often obtained pushing values into a list in the
-        producer side, and waiting for this values in the consumer side using <a href="/commands/rpop.html">RPOP</a>
-        (using polling), or <a href="/commands/brpop.html">BRPOP</a> if the client is better served by a blocking
-        operation.</p>
+        <p>Redis通常都被用做一个处理各种后台工作或消息任务的消息服务器。
+        一个简单的队列模式就是：生产者把消息放入一个列表中，等待消息的消费者用 <a href="/commands/rpop.html">RPOP</a> 命令（用轮询方式），
+        或者用 <a href="/commands/brpop.html">BRPOP</a> 命令（如果客户端使用阻塞操作会更好）来得到这个消息。</p>
         
-        <p>However in this context the obtained queue is not <em>reliable</em> as messages can
-        be lost, for example in the case there is a network problem or if the consumer
-        crashes just after the message is received but it is still to process.</p>
+        <p>然而，因为消息有可能会丢失，所以这种队列并是<em>不安全</em>的。例如，当接收到消息后，出现了网络问题或者消费者端崩溃了，
+        那么这个消息就丢失了。</p>
         
-        <p><a href="/commands/rpoplpush.html">RPOPLPUSH</a> (or <a href="/commands/brpoplpush.html">BRPOPLPUSH</a> for the blocking variant) offers a way to avoid
-        this problem: the consumer fetches the message and at the same time pushes it
-        into a <em>processing</em> list.
-        It will use the <a href="/commands/lrem.html">LREM</a> command in order to remove the message from the
-        <em>processing</em> list once the message has been processed.</p>
+        <p><a href="/commands/rpoplpush.html">RPOPLPUSH</a> (或者其阻塞版本的 <a href="/commands/brpoplpush.html">BRPOPLPUSH</a>）
+        提供了一种方法来避免这个问题：消费者端取到消息的同时把该消息放入一个<em>正在处理中</em>的列表。
+        当消息被处理了之后，该命令会使用 <a href="/commands/lrem.html">LREM</a> 命令来移除<em>正在处理中</em>列表中的对应消息。</p>
         
-        <p>An additional client may monitor the <em>processing</em> list for items that remain
-        there for too much time, and will push those timed out items into the queue
-        again if needed.</p>
+        <p>另外，可以添加一个客户端来监控这个<em>正在处理中</em>列表，如果有某些消息已经在这个列表中存在很长时间了（即超过一定的处理时限），
+        那么这个客户端会把这些超时消息重新加入到队列中。</p>
         
-        <h2>Pattern: Circular list</h2>
+        <h2>模式：循环列表</h2>
 
+        <p><a href="/commands/rpoplpush.html">RPOPLPUSH</a> 命令的 <code>source</code> 和  <code>destination</code> 是相同的话，
+        那么客户端在访问一个拥有n个元素的列表时，可以在 <span class="math">O(N)</span> 时间里一个接一个获取列表元素，
+        而不用像 <a href="/commands/lrange.html">LRANGE</a> 那样需要把整个列表从服务器端传送到客户端。</p>
         
-        <p>Using <a href="/commands/rpoplpush.html">RPOPLPUSH</a> with the same source and destination key, a client can visit
-        all the elements of an N-elements list, one after the other, in <span class="math">O(N) </span>without
-        transferring the full list from the server to the client using a single <a href="/commands/lrange.html">LRANGE</a>
-        operation.</p>
+        <p>上面这种模式即使在以下两种情况下照样能很好地工作：
+        * 有多个客户端同时对同一个列表进行旋转（rotating）：它们会取得不同的元素，直到列表里所有元素都被访问过，又从头开始这个操作。
+        * 有其他客户端在往列表末端加入新的元素。</p>
         
-        <p>The above pattern works even if the following two conditions: * There are
-        multiple clients rotating the list: they&#39;ll fetch different elements, until all
-        the elements of the list are visited, and the process restarts.
-        * Even if other clients are actively pushing new items at the end of the list.</p>
+        <p>这个模式让我们可以很容易地实现这样一个系统：有 N 个客户端，需要连续不断地对一批元素进行处理，而且处理的过程必须尽可能地快。
+        一个典型的例子就是服务器上的监控程序：它们需要在尽可能短的时间内，并行地检查一批网站，确保它们的可访问性。</p>
         
-        <p>The above makes it very simple to implement a system where a set of items must
-        be processed by N workers continuously as fast as possible.
-        An example is a monitoring system that must check that a set of web sites are
-        reachable, with the smallest delay possible, using a number of parallel workers.</p>
-        
-        <p>Note that this implementation of workers is trivially scalable and reliable,
-        because even if a message is lost the item is still in the queue and will be
-        processed at the next iteration.</p>
+        <p>值得注意的是，使用这个模式的客户端是易于扩展（scalable）且安全的（reliable），因为即使客户端把接收到的消息丢失了，
+        这个消息依然存在于队列中，等下次迭代到它的时候，由其他客户端进行处理。</p>
         
       </article>
     </div>
