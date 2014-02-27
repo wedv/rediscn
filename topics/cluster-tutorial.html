@@ -8,7 +8,7 @@
     <script src='/js/jquery.min.1.4.js'></script>
     <script src='/js/app.js'></script>
     <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
-    <title>Redis中文资料站</title>
+    <title>Redis 集群教程 -- Redis中文资料站</title>
 	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
   </head>
   <body class=''>
@@ -57,7 +57,7 @@
         
         <p>为了使在部分节点失败或者大部分节点无法通信的情况下集群仍然可用，所以集群使用了主从复制模型,每个节点都会有N-1个复制品.</p>
         
-        <p>在我们例子中具有A，B，C三个节点的集群,在没有复制模型的情况下,如果节点B失败了，那么整个集群就会以为缺少5501-11000这个范围的槽而不可用.
+        <p>在我们例子中具有A，B，C三个节点的集群,在没有复制模型的情况下,如果节点B失败了，那么整个集群就会以为缺少5501-11000这个范围的槽而不可用.</p>
         
         <p>然而如果在集群创建的时候（或者过一段时间）我们为每个节点添加一个从节点A1，B1，C1,那么整个集群便有三个master节点和三个slave节点组成，这样在节点B失败后，集群便会选举B1为新的主节点继续服务，整个集群便不会因为槽找不到而不可用了</p>
                 
@@ -83,11 +83,11 @@
         
         <p> 举个例子 假设集群包含 A 、 B 、 C 、 A1 、 B1 、 C1 六个节点， 其中 A 、B 、C 为主节点， A1 、B1 、C1 为A，B，C的从节点， 还有一个客户端 Z1 </p>
         
-        <p>假设集群中发生网络分区，那么集群可能会分为两方，大部分的一方包含节点 A 、C 、A1 、B1 和 C1 ，小部分的一方则包含节点 B 和客户端 Z1 .
+        <p>假设集群中发生网络分区，那么集群可能会分为两方，大部分的一方包含节点 A 、C 、A1 、B1 和 C1 ，小部分的一方则包含节点 B 和客户端 Z1 .</p>
         
-        <p>Z1仍然能够向主节点B中写入, 如果网络分区发生时间较短,那么集群将会继续正常运作,如果分区的时间足够让大部分的一方将B1选举为新的master，那么Z1写入B中得数据便丢失了. 
+        <p>Z1仍然能够向主节点B中写入, 如果网络分区发生时间较短,那么集群将会继续正常运作,如果分区的时间足够让大部分的一方将B1选举为新的master，那么Z1写入B中得数据便丢失了. </p>
         
-        <p>注意， 在网络分裂出现期间， 客户端 Z1 可以向主节点 B 发送写命令的最大时间是有限制的， 这一时间限制称为节点超时时间（node timeout）， 是 Redis 集群的一个重要的配置选项：
+        <p>注意， 在网络分裂出现期间， 客户端 Z1 可以向主节点 B 发送写命令的最大时间是有限制的， 这一时间限制称为节点超时时间（node timeout）， 是 Redis 集群的一个重要的配置选项：</p>
         
         <h1>搭建并使用Redis集群</h1>
         
@@ -97,7 +97,7 @@
         
         <pre><code>port 7000&#x000A;cluster-enabled yes&#x000A;cluster-config-file nodes.conf&#x000A;cluster-node-timeout 5000&#x000A;appendonly yes&#x000A;</code></pre>
         
-        <p>文件中的 cluster-enabled 选项用于开实例的集群模式， 而 cluster-conf-file 选项则设定了保存节点配置文件的路径， 默认值为 nodes.conf.节点配置文件无须人为修改， 它由 Redis 集群在启动时创建， 并在有需要时自动进行更新。
+        <p>文件中的 cluster-enabled 选项用于开实例的集群模式， 而 cluster-conf-file 选项则设定了保存节点配置文件的路径， 默认值为 nodes.conf.节点配置文件无须人为修改， 它由 Redis 集群在启动时创建， 并在有需要时自动进行更新。</p>
         
         <p>要让集群正常运作至少需要三个主节点，不过在刚开始试用集群功能时， 强烈建议使用六个节点： 其中三个为主节点， 而其余三个则是各个主节点的从节点。</p>
         
@@ -144,12 +144,13 @@
         <p>Redis 集群现阶段的一个问题是客户端实现很少。 以下是一些我知道的实现：</p>
         
         <ul>
-        <li><a href="http://github.com/antirez/redis-rb-cluster">redis-rb-cluster</a> 是我（@antirez）编写的 Ruby 实现， 用于作为其他实现的参考。 该实现是对 redis-rb 的一个简单包装， 高效地实现了与集群进行通讯所需的最少语义（semantic）.</li>
-        <li><a href="https://github.com/Grokzen/redis-py-cluster">redis-py-cluster</a> redis-py-cluster 看上去是 redis-rb-cluster 的一个 Python 版本， 这个项目有一段时间没有更新了（最后一次提交是在六个月之前）， 不过可以将这个项目用作学习集群的起点。</li>
-        <li>流行的<a href="https://github.com/nrk/predis">Predis</a> 曾经对早期的 Redis 集群有过一定的支持， 但我不确定它对集群的支持是否完整， 也不清楚它是否和最新版本的 Redis 集群兼容 （因为新版的 Redis 集群将槽的数量从 4k 改为 16k 了）.</li>
-        <li>使用最多的时java客户端, <a href="https://github.com/xetorthio/jedis">Jedis</a> 最近添加了对集群的支持, 详细请查看项目README中<em>Jedis Cluster</em>部分.</li>
-        <li>Redis unstable 分支中的 <code>redis-cli</code> 程序实现了非常基本的集群支持， 可以使用命令 <code>redis-cli -c<code> 来启动。</li>
+	        <li><a href="http://github.com/antirez/redis-rb-cluster">redis-rb-cluster</a> 是我（@antirez）编写的 Ruby 实现， 用于作为其他实现的参考。 该实现是对 redis-rb 的一个简单包装， 高效地实现了与集群进行通讯所需的最少语义（semantic）.</li>
+	        <li><a href="https://github.com/Grokzen/redis-py-cluster">redis-py-cluster</a> redis-py-cluster 看上去是 redis-rb-cluster 的一个 Python 版本， 这个项目有一段时间没有更新了（最后一次提交是在六个月之前）， 不过可以将这个项目用作学习集群的起点。</li>
+	        <li>流行的<a href="https://github.com/nrk/predis">Predis</a> 曾经对早期的 Redis 集群有过一定的支持， 但我不确定它对集群的支持是否完整， 也不清楚它是否和最新版本的 Redis 集群兼容 （因为新版的 Redis 集群将槽的数量从 4k 改为 16k 了）.</li>
+	        <li>使用最多的时java客户端, <a href="https://github.com/xetorthio/jedis">Jedis</a> 最近添加了对集群的支持, 详细请查看项目README中<em>Jedis Cluster</em>部分.</li>
+	        <li>Redis unstable 分支中的 <code>redis-cli</code> 程序实现了非常基本的集群支持， 可以使用命令 <code>redis-cli -c</code> 来启动。</li>
         </ul>
+        
         <p>测试 Redis 集群比较简单的办法就是使用 <code>redis-rb-cluster </code>或者 <code>redis-cli </code>， 接下来我们将使用 <code>redis-cli </code>为例来进行演示：</p>
         
         <pre><code>$ redis-cli -c -p 7000&#x000A;redis 127.0.0.1:7000&gt; set foo bar&#x000A;-&gt; Redirected to slot [12182] located at 127.0.0.1:7002&#x000A;OK&#x000A;redis 127.0.0.1:7002&gt; set hello world&#x000A;-&gt; Redirected to slot [866] located at 127.0.0.1:7000&#x000A;OK&#x000A;redis 127.0.0.1:7000&gt; get foo&#x000A;-&gt; Redirected to slot [12182] located at 127.0.0.1:7002&#x000A;&quot;bar&quot;&#x000A;redis 127.0.0.1:7000&gt; get hello&#x000A;-&gt; Redirected to slot [866] located at 127.0.0.1:7000&#x000A;&quot;world&quot;&#x000A;</code></pre>
@@ -177,7 +178,7 @@
         
         <p>代码中的每个集群操作都使用一个 begin 和 rescue 代码块（block）包裹着， 因为我们希望在代码出错时， 将错误打印到终端上面， 而不希望应用因为异常（exception）而退出。</p>
         
-        <p>代码的第七行是代码中第一个有趣的地方， 它创建了一个 Redis 集群对象， 其中创建对象所使用的参数及其意义如下：第一个参数是记录了启动节点的 startup_nodes 列表， 列表中包含了两个集群节点的地址。第二个参数指定了对于集群中的各个不同的节点， Redis 集群对象可以获得的最大连接数 ，第三个参数 timeout 指定了一个命令在执行多久之后， 才会被看作是执行失败。
+        <p>代码的第七行是代码中第一个有趣的地方， 它创建了一个 Redis 集群对象， 其中创建对象所使用的参数及其意义如下：第一个参数是记录了启动节点的 startup_nodes 列表， 列表中包含了两个集群节点的地址。第二个参数指定了对于集群中的各个不同的节点， Redis 集群对象可以获得的最大连接数 ，第三个参数 timeout 指定了一个命令在执行多久之后， 才会被看作是执行失败。</p>
         
         <p>启动列表中并不需要包含所有集群节点的地址， 但这些地址中至少要有一个是有效的： 一旦 redis-rb-cluster 成功连接上集群中的某个节点时， 集群节点列表就会被自动更新， 任何真正的的集群客户端都应该这样做。</p>
         
@@ -304,7 +305,7 @@
         
         <pre><code># Manual failover user request accepted.&#x000A;# Received replication offset for paused master manual failover: 347540&#x000A;# All master replication stream processed, manual failover can start.&#x000A;# Start of election delayed for 0 milliseconds (rank #0, offset 347540).&#x000A;# Starting a failover election for epoch 7545.&#x000A;# Failover election won: I&#39;m the new master.&#x000A;</code></pre>
         
-        <p>其基本过程如下：客户端不再链接我们淘汰的主节点，同时主节点向从节点发送复制偏移量,从节点得到复制偏移量后故障转移开始,接着通知主节点进行配置切换,当客户端在旧的master上解锁后重新连接到新的主节点上。
+        <p>其基本过程如下：客户端不再链接我们淘汰的主节点，同时主节点向从节点发送复制偏移量,从节点得到复制偏移量后故障转移开始,接着通知主节点进行配置切换,当客户端在旧的master上解锁后重新连接到新的主节点上。</p>
       
         <h2>添加一个新</h2>
         
@@ -351,7 +352,7 @@
         
         <pre><code>./redis-trib.rb add-node --slave 127.0.0.1:7006 127.0.0.1:7000&#x000A;</code></pre>
         
-        <p>此处的命令和添加一个主节点命令类似，此处并没有指定添加的这个从节点的主节点，这种情况下系统会在其他的复制集中的主节点中随机选取一个作为这个从节点的主节点。/p>
+        <p>此处的命令和添加一个主节点命令类似，此处并没有指定添加的这个从节点的主节点，这种情况下系统会在其他的复制集中的主节点中随机选取一个作为这个从节点的主节点。</p>
         
         <p>你可以通过下面的命令指定主节点:</p>
         
@@ -400,6 +401,7 @@
         <li>要在一个主节点上添加多个从节点.</li>
         <li>参数来控制从节点迁移 <code>replica-migration-barrier</code>:你可以仔细阅读<code>redis.conf</code> .</li>
         </ul>
+        
       </article>
        </div>
     <script src='/js/foot.js'></script>
