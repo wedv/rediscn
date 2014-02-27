@@ -21,6 +21,14 @@
         <span id='command_args_span' class='arg'></span>
       </h1>
       <article>
+       	<aside>
+        	<script type='text/javascript'>showCmdURL();</script>
+        </aside>
+        
+        <div class='metadata'>
+          <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
+           
+        </div>
       	<p>The <code>CONFIG REWRITE</code> command rewrites the <code>redis.conf</code> file the server was started with, applying the minimal changes needed to make it reflecting the configuration currently used by the server, that may be different compared to the original one because of the use of the <code>CONFIG SET</code> command.</p>
         
         <p>The rewrite is performed in a very conservative way:</p>
