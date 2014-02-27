@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	<p>The <code>CONFIG REWRITE</code> command rewrites the <code>redis.conf</code> file the server was started with, applying the minimal changes needed to make it reflecting the configuration currently used by the server, that may be different compared to the original one because of the use of the <code>CONFIG SET</code> command.</p>
+        
+        <p>The rewrite is performed in a very conservative way:</p>
+        
+        <ul>
+        <li>Comments and the overall structure of the original redis.conf are preserved as much as possible.</li>
+        <li>If an option already exists in the old redis.conf file, it will be rewritten at the same position (line number).</li>
+        <li>If an option was not already present, but it is set to its default value, it is not added by the rewrite process.</li>
+        <li>If an option was not already present, but it is set to a non-default value, it is appended at the end of the file.</li>
+        <li>Non used lines are blanked. For instance if you used to have multiple <code>save</code> directives, but the current configuration has fewer or none as you disabled RDB persistence, all the lines will be blanked.</li>
+        </ul>
+        
+        <p>CONFIG REWRITE is also able to rewrite the configuration file from scratch if the original one no longer exists for some reason. However if the server was started without a configuration file at all, the CONFIG REWRITE will just return an error.</p>
+        
+        <h2>Atomic rewrite process</h2>
+        
+        <p>In order to make sure the redis.conf file is always consistent, that is, on errors or crashes you always end with the old file, or the new one, the rewrite is perforemd with a single <code>write(2)</code> call that has enough content to be at least as big as the old file. Sometimes additional padding in the form of comments is added in order to make sure the resulting file is big enough, and later the file gets truncated to remove the padding at the end.</p>
+        
+        <h2>Return value</h2>
+        
+        <p><a href="/topics/protocol#simple-string-reply">Simple string reply</a>: <code>OK</code> when the configuration was rewritten properly.
+        Otherwise an error is returned.</p>
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>

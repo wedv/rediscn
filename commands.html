@@ -43,9 +43,11 @@
 			showCommandsHtmlItem('brpoplpush');
 			showCommandsHtmlItem('client-kill');
 			showCommandsHtmlItem('client-list');
+			showCommandsHtmlItem('client-pause');
 			showCommandsHtmlItem('client-getname');
 			showCommandsHtmlItem('client-setname');
-			showCommandsHtmlItem('config-get');
+			showCommandsHtmlItem('config-get'); 
+			showCommandsHtmlItem('config-rewrite');
 			showCommandsHtmlItem('config-set');
 			showCommandsHtmlItem('config-resetstat');
 			showCommandsHtmlItem('dbsize');
@@ -79,6 +81,7 @@
 			showCommandsHtmlItem('hlen');
 			showCommandsHtmlItem('hmget');
 			showCommandsHtmlItem('hmset');
+			showCommandsHtmlItem('hscan');
 			showCommandsHtmlItem('hset');
 			showCommandsHtmlItem('hsetnx');
 			showCommandsHtmlItem('hvals');
@@ -114,6 +117,7 @@
 			showCommandsHtmlItem('psubscribe');
 			showCommandsHtmlItem('pttl');
 			showCommandsHtmlItem('publish');
+			showCommandsHtmlItem('pubsub');
 			showCommandsHtmlItem('punsubscribe');
 			showCommandsHtmlItem('quit');
 			showCommandsHtmlItem('randomkey');
@@ -127,6 +131,7 @@
 			showCommandsHtmlItem('sadd');
 			showCommandsHtmlItem('save');
 			showCommandsHtmlItem('scard');
+			showCommandsHtmlItem('scan');
 			showCommandsHtmlItem('script-exists');
 			showCommandsHtmlItem('script-flush');
 			showCommandsHtmlItem('script-kill');
@@ -151,6 +156,7 @@
 			showCommandsHtmlItem('spop');
 			showCommandsHtmlItem('srandmember');
 			showCommandsHtmlItem('srem');
+			showCommandsHtmlItem('sscan');
 			showCommandsHtmlItem('strlen');
 			showCommandsHtmlItem('subscribe');
 			showCommandsHtmlItem('sunion');
@@ -176,6 +182,7 @@
 			showCommandsHtmlItem('zrevrange');
 			showCommandsHtmlItem('zrevrangebyscore');
 			showCommandsHtmlItem('zrevrank');
+			showCommandsHtmlItem('zscan');
 			showCommandsHtmlItem('zscore');
 			showCommandsHtmlItem('zunionstore');
 			document.write('</ul>');		
@@ -183,7 +190,18 @@
     </section>
     <div class='text' style="width:100%; max-width:93%;word-wrap:break-word;">
       <section >
-redis所有已知命令：<br/>    append,auth,bgrewriteaof,bgsave,bitcount,bitop,blpop,brpop,brpoplpush,client-kill,client-list,client-getname,client-setname,config-get,config-set,config-resetstat,dbsize,debug-object,debug-segfault,decr,decrby,del,discard,dump,echo,eval,evalsha,exec,exists,expire,expireat,flushall,flushdb,get,getbit,getrange,getset,hdel,hexists,hget,hgetall,hincrby,hincrbyfloat,hkeys,hlen,hmget,hmset,hset,hsetnx,hvals,incr,incrby,incrbyfloat,info,keys,lastsave,lindex,linsert,llen,lpop,lpush,lpushx,lrange,lrem,lset,ltrim,mget,migrate,monitor,move,mset,msetnx,multi,object,persist,pexpire,pexpireat,ping,psetex,psubscribe,pttl,publish,punsubscribe,quit,randomkey,rename,renamenx,restore,rpop,rpoplpush,rpush,rpushx,sadd,save,scard,script-exists,script-flush,script-kill,script-load,sdiff,sdiffstore,select,set,setbit,setex,setnx,setrange,shutdown,sinter,sinterstore,sismember,slaveof,slowlog,smembers,smove,sort,spop,srandmember,srem,strlen,subscribe,sunion,sunionstore,sync,time,ttl,type,unsubscribe,unwatch,watch,zadd,zcard,zcount,zincrby,zinterstore,zrange,zrangebyscore,zrank,zrem,zremrangebyrank,zremrangebyscore,zrevrange,zrevrangebyscore,zrevrank,zscore,zunionstore
+redis所有已知命令：<br/>    
+append,auth,bgrewriteaof,bgsave,bitcount,bitop,blpop,brpop,brpoplpush,client-kill,client-list,client-getname,
+client-setname,config-get,config-set,config-resetstat,dbsize,debug-object,debug-segfault,decr,decrby,del,discard,
+dump,echo,eval,evalsha,exec,exists,expire,expireat,flushall,flushdb,get,getbit,getrange,getset,hdel,hexists,hget,
+hgetall,hincrby,hincrbyfloat,hkeys,hlen,hmget,hmset,hset,hsetnx,hvals,incr,incrby,incrbyfloat,info,keys,lastsave,
+lindex,linsert,llen,lpop,lpush,lpushx,lrange,lrem,lset,ltrim,mget,migrate,monitor,move,mset,msetnx,multi,object,
+persist,pexpire,pexpireat,ping,psetex,psubscribe,pttl,publish,punsubscribe,quit,randomkey,rename,renamenx,restore,
+rpop,rpoplpush,rpush,rpushx,sadd,save,scard,script-exists,script-flush,script-kill,script-load,sdiff,sdiffstore,
+select,set,setbit,setex,setnx,setrange,shutdown,sinter,sinterstore,sismember,slaveof,slowlog,smembers,smove,sort,
+spop,srandmember,srem,strlen,subscribe,sunion,sunionstore,sync,time,ttl,type,unsubscribe,unwatch,watch,zadd,zcard,
+zcount,zincrby,zinterstore,zrange,zrangebyscore,zrank,zrem,zremrangebyrank,zremrangebyscore,zrevrange,
+zrevrangebyscore,zrevrank,zscore,zunionstore,pubsub,config-rewrite,client-pause,hscan,scan,sscan,zscan,
 </section>
       
     </div>

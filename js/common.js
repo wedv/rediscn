@@ -161,6 +161,7 @@ allCmdArr['randomkey']        =cmdKeys['randomkey']          = new Command('rand
 allCmdArr['rename']           =cmdKeys['rename']             = new Command('rename','RENAME','cmdKeys','key newkey','1.0.0','将一个key重命名');
 allCmdArr['renamenx']         =cmdKeys['renamenx']           = new Command('renamenx','RENAMENX','cmdKeys','key newkey','1.0.0','重命名一个key,新的key必须是不存在的key');
 allCmdArr['restore']          =cmdKeys['restore']            = new Command('restore','RESTORE','cmdKeys','key ttl serialized-value','2.6.0','Create a key using the provided serialized value, previously obtained using DUMP.');
+allCmdArr['scan']          =cmdKeys['scan']            = new Command('scan','SCAN','cmdKeys','cursor [MATCH pattern] [COUNT count]','2.8.0','增量迭代key');
 allCmdArr['sort']             =cmdKeys['sort']               = new Command('sort','SORT','cmdKeys','key [BY pattern] [LIMIT offset count] [GET pattern [GET pattern ...]] [ASC|DESC] [ALPHA] [STORE destination]','1.0.0','对队列、集合、有序集合排序');
 allCmdArr['ttl']              =cmdKeys['ttl']                = new Command('ttl','TTL','cmdKeys','key','1.0.0','获取key的有效时间（单位：秒）');
 allCmdArr['type']             =cmdKeys['type']               = new Command('type','TYPE','cmdKeys','key','1.0.0','获取key的存储类型');
@@ -200,6 +201,7 @@ allCmdArr['hkeys']            =cmdHashs['hkeys']             = new Command('hkey
 allCmdArr['hlen']             =cmdHashs['hlen']              = new Command('hlen','HLEN','cmdHashs','key','2.0.0','获取hash里所有字段的数量');
 allCmdArr['hmget']            =cmdHashs['hmget']             = new Command('hmget','HMGET','cmdHashs','key field [field ...]','2.0.0','获取hash里面指定字段的值');
 allCmdArr['hmset']            =cmdHashs['hmset']             = new Command('hmset','HMSET','cmdHashs','key field value [field value ...]','2.0.0','设置hash字段值');
+allCmdArr['hscan']            =cmdHashs['hscan']             = new Command('hscan','HSCAN','cmdHashs','key cursor [MATCH pattern] [COUNT count]','2.8.0','迭代hash里面的元素');
 allCmdArr['hset']             =cmdHashs['hset']              = new Command('hset','HSET','cmdHashs','key field value','2.0.0','设置hash里面一个字段的值');
 allCmdArr['hsetnx']           =cmdHashs['hsetnx']            = new Command('hsetnx','HSETNX','cmdHashs','key field value','2.0.0','设置hash的一个字段，只有当这个字段不存在时有效');
 allCmdArr['hvals']            =cmdHashs['hvals']             = new Command('hvals','HVALS','cmdHashs','key','2.0.0','获得hash的所有值');
@@ -217,9 +219,11 @@ allCmdArr['bgsave']           =cmdServer['bgsave']           = new Command('bgsa
 allCmdArr['client-getname']   =cmdServer['client-getname']   = new Command('client-getname','CLIENT GETNAME','cmdServer','','2.6.9','获得当前连接名称');
 allCmdArr['client-kill']      =cmdServer['client-kill']      = new Command('client-kill','CLIENT KILL','cmdServer','ip:port','2.4.0','关闭客户端连接');
 allCmdArr['client-list']      =cmdServer['client-list']      = new Command('client-list','CLIENT LIST','cmdServer','','2.4.0','获得客户端连接列表');
+allCmdArr['client-pause']     =cmdServer['client-pause']     = new Command('client-pause','CLIENT PAUSE','cmdServer','timeout','2.9.50','暂停处理客户端命令');
 allCmdArr['client-setname']   =cmdServer['client-setname']   = new Command('client-setname','CLIENT SETNAME','cmdServer','connection-name','2.6.9','设置当前连接的名字');
 allCmdArr['config-get']       =cmdServer['config-get']       = new Command('config-get','CONFIG GET','cmdServer','parameter','2.0.0','获取配置参数的值');
 allCmdArr['config-resetstat'] =cmdServer['config-resetstat'] = new Command('config-resetstat','CONFIG RESETSTAT','cmdServer','','2.0.0','复位再分配使用info命令报告的统计');
+allCmdArr['config-rewrite']   =cmdServer['config-rewrite']   = new Command('config-rewrite','CONFIG REWRITE','cmdServer','','2.8.0','从写内存中的配置文件');
 allCmdArr['config-set']       =cmdServer['config-set']       = new Command('config-set','CONFIG SET','cmdServer','parameter value','2.0.0','获取配置参数的值');
 allCmdArr['dbsize']           =cmdServer['dbsize']           = new Command('dbsize','DBSIZE','cmdServer','','1.0.0','返回当前数据库里面的keys数量');
 allCmdArr['debug-object']     =cmdServer['debug-object']     = new Command('debug-object','DEBUG OBJECT','cmdServer','key','1.0.0','获取一个key的debug信息');
@@ -275,6 +279,7 @@ allCmdArr['smove']            =cmdSets['smove']               = new Command('smo
 allCmdArr['spop']             =cmdSets['spop']                = new Command('spop','SPOP','cmdSets','key','1.0.0','删除并获取一个集合里面的元素');
 allCmdArr['srandmember']      =cmdSets['srandmember']         = new Command('srandmember','SRANDMEMBER','cmdSets','key [count]','1.0.0','从集合里面随机获取一个key');
 allCmdArr['srem']             =cmdSets['srem']                = new Command('srem','SREM','cmdSets','key member [member ...]','1.0.0','从集合里删除一个或多个key');
+allCmdArr['sscan']             =cmdSets['sscan']              = new Command('sscan','SSCAN','cmdSets','key cursor [MATCH pattern] [COUNT count]','2.8.0','迭代set里面的元素');
 allCmdArr['sunion']           =cmdSets['sunion']              = new Command('sunion','SUNION','cmdSets','key [key ...]','1.0.0','添加多个set元素');
 allCmdArr['sunionstore']      =cmdSets['sunionstore']         = new Command('sunionstore','SUNIONSTORE','cmdSets','destination key [key ...]','1.0.0','合并set元素，并将结果存入新的set里面');
 
@@ -293,12 +298,14 @@ allCmdArr['zremrangebyscore']   =cmdSortedSets['zremrangebyscore'] = new Command
 allCmdArr['zrevrange']   =cmdSortedSets['zrevrange'] = new Command('zrevrange','ZREVRANGE','cmdSortedSets','key start stop [WITHSCORES]','1.2.0','在排序的设置返回的成员范围，通过索引，下令从分数高到低');
 allCmdArr['zrevrangebyscore']   =cmdSortedSets['zrevrangebyscore'] = new Command('zrevrangebyscore','ZREVRANGEBYSCORE','cmdSortedSets','key max min [WITHSCORES] [LIMIT offset count]','2.2.0','返回的成员在排序设置的范围，由得分，下令从分数高到低');
 allCmdArr['zrevrank']   =cmdSortedSets['zrevrank'] = new Command('zrevrank','ZREVRANK','cmdSortedSets','key member','2.0.0','确定指数在排序集的成员，下令从分数高到低');
+allCmdArr['zscan']   =cmdSortedSets['zscan'] = new Command('zscan','ZSCAN','cmdSortedSets','key cursor [MATCH pattern] [COUNT count]','2.8.0','迭代sorted sets里面的元素');
 allCmdArr['zscore']   =cmdSortedSets['zscore'] = new Command('zscore','ZSCORE','cmdSortedSets','key member','1.2.0','获取成员在排序设置相关的比分');
 allCmdArr['zunionstore']   =cmdSortedSets['zunionstore'] = new Command('zunionstore','ZUNIONSTORE','cmdSortedSets','destination numkeys key [key ...] [WEIGHTS weight [weight ...]] [AGGREGATE SUM|MIN|MAX]','2.0.0','添加多个排序集和导致排序的设置存储在一个新的关键');
 
 // 初始化 pub/sub 下的所有命
 allCmdArr['psubscribe']   =cmdPubSub['psubscribe'] = new Command('psubscribe','PSUBSCRIBE','cmdPubSub','pattern [pattern ...]','2.0.0','听出版匹配给定模式的渠道的消息');
 allCmdArr['publish']   =cmdPubSub['publish'] = new Command('publish','PUBLISH','cmdPubSub','channel message','2.0.0','发布一条消息到频道');
+allCmdArr['pubsub']   =cmdPubSub['pubsub'] = new Command('pubsub','PUBSUB','cmdPubSub','subcommand [argument [argument ...]]','2.8.0','检查的Pub/Sub子系统的状态');
 allCmdArr['punsubscribe']   =cmdPubSub['punsubscribe'] = new Command('punsubscribe','PUNSUBSCRIBE','cmdPubSub','[pattern [pattern ...]]','2.0.0','停止发布到匹配给定模式的渠道的消息听');
 allCmdArr['subscribe']   =cmdPubSub['subscribe'] = new Command('subscribe','SUBSCRIBE','cmdPubSub','channel [channel ...]','2.0.0','聆听发布途径的消息');
 allCmdArr['unsubscribe']   =cmdPubSub['unsubscribe'] = new Command('unsubscribe','UNSUBSCRIBE','cmdPubSub','[channel [channel ...]]','2.0.0','停止发布途径的消息听');

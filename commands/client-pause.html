@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='/css/styles.css' rel='stylesheet' type='text/css' />
+    <link href='/images/favicon.png' rel='shortcut icon' />
+    <script src='/js/jquery.min.1.4.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/common.js'></script>
+    
+    <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+    <title>redis - 命令</title>
+	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	
+  </head>
+  <body class=''>
+    <script src='/js/head.js'></script>
+    <div class='text'>
+      <h1 class='command'>
+        <span id='command_name_span' class='name'></span>
+        <span id='command_args_span' class='arg'></span>
+      </h1>
+      <article>
+      	 <p><code>CLIENT PAUSE</code> is a connections control command able to suspend all the Redis clients for the specified amount of time (in milliseconds).</p>
+        
+        <p>The command performs the following actions:</p>
+        
+        <ul>
+        <li>It stops processing all the pending commands from normal and pub/sub clients. However interactions with slaves will continue normally.</li>
+        <li>However it returns OK to the caller ASAP, so the <code>CLIENT PAUSE</code> command execution is not paused by itself.</li>
+        <li>When the specified amount of time has elapsed, all the clients are unblocked: this will trigger the processing of all the commands accumulated in the query buffer of every client during the pause.</li>
+        </ul>
+        
+        <p>This command is useful as it makes able to switch clients from a Redis instance to another one in a controlled way. For example during an instance upgrade the system administrator could do the following:</p>
+        
+        <ul>
+        <li>Pause the clients using <code>CLIENT PAUSE</code></li>
+        <li>Wait a few seconds to make sure the slaves processed the latest replication stream from the master.</li>
+        <li>Turn one of the slaves into a master.</li>
+        <li>Reconfigure clients to connect with the new master.</li>
+        </ul>
+        
+        <p>It is possible to send <code>CLIENT PAUSE</code> in a MULTI/EXEC block together with the <code>INFO replication</code> command in order to get the current master offset at the time the clients are blocked. This way it is possible to wait for a specific offset in the slave side in order to make sure all the replication stream was processed.</p>
+        
+        <h2>Return value</h2>
+        
+        <p><a href="/topics/protocol#simple-string-reply">Simple string reply</a>: The command returns OK or an error if the timeout is invalid.</p>
+      </article>
+    </div>
+    
+    <script type='text/javascript'>startShow();</script>
+    <div class='text' id='comments'>
+      <div id='disqus_thread'></div>
+      <script type='text/javascript'>
+        //<![CDATA[
+          var disqus_shortname = 'rediscn';
+          
+          // The following are highly recommended additional parameters. Remove the slashes in front to use.
+          var disqus_identifier = 'command_'+curCommandObj.key;
+          var disqus_url = curCommandObj.getdisqusUrl();
+          
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        //]]>
+      </script>
+      <a class='dsq-brlink' href='http://disqus.com'>
+        Comments powered by
+        <span class='logo-disqus'>
+          Disqus
+        </span>
+      </a>
+    </div>
+
+    
+    <script src='/js/foot.js'></script>
+    
+  </body>
+</html>
