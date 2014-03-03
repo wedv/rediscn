@@ -28,7 +28,7 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'>2.8.0</span>。</strong></p>
-		      <p><strong>时间复杂度：</strong>增量式迭代命令每次执行的复杂度为O(1) ,对数据集进行一次完整迭代的复杂度为O(N) ,其中 N 为数据集中的元素数量。</p>
+		  <p><strong>时间复杂度：</strong>增量式迭代命令每次执行的复杂度为O(1) ,对数据集进行一次完整迭代的复杂度为O(N) ,其中 N 为数据集中的元素数量。</p>
         </div>
       	<p>The <a href="/commands/scan.html">SCAN</a> 命令及其相关的 <a href="/commands/sscan.html">SSCAN</a>, <a href="/commands/hscan.html">HSCAN</a> and <a href="/commands/zscan.html">ZSCAN</a> 命令都用于增量迭代一个集合元素。</p>
         
@@ -51,7 +51,7 @@
         
         <p>当 SCAN 命令的游标参数被设置为 0 时， 服务器将开始一次新的迭代， 而当服务器向用户返回值为 0 的游标时， 表示迭代已结束。</p>
         
-	    	<p>以下是一个 SCAN 命令的迭代过程示例 :</p>
+		<p>以下是一个 SCAN 命令的迭代过程示例 :</p>
         <pre><code>redis 127.0.0.1:6379&gt; scan 0&#x000A;1) &quot;17&quot;&#x000A;2)  1) &quot;key:12&quot;&#x000A;    2) &quot;key:8&quot;&#x000A;    3) &quot;key:4&quot;&#x000A;    4) &quot;key:14&quot;&#x000A;    5) &quot;key:16&quot;&#x000A;    6) &quot;key:17&quot;&#x000A;    7) &quot;key:15&quot;&#x000A;    8) &quot;key:10&quot;&#x000A;    9) &quot;key:3&quot;&#x000A;   10) &quot;key:7&quot;&#x000A;   11) &quot;key:1&quot;&#x000A;redis 127.0.0.1:6379&gt; scan 17&#x000A;1) &quot;0&quot;&#x000A;2) 1) &quot;key:5&quot;&#x000A;   2) &quot;key:18&quot;&#x000A;   3) &quot;key:0&quot;&#x000A;   4) &quot;key:2&quot;&#x000A;   5) &quot;key:19&quot;&#x000A;   6) &quot;key:13&quot;&#x000A;   7) &quot;key:6&quot;&#x000A;   8) &quot;key:9&quot;&#x000A;   9) &quot;key:11&quot;&#x000A;</code></pre>
         
         <p>在上面这个例子中， 第一次迭代使用 0 作为游标， 表示开始一次新的迭代。第二次迭代使用的是第一次迭代时返回的游标 17 ，作为新的迭代参数 。</p>
@@ -60,7 +60,7 @@
         
         <p>在第二次调用 SCAN 命令时， 命令返回了游标 0 ， 这表示迭代已经结束， 整个数据集已经被完整遍历过了。</p>
 	    
-	    	<p> <strong>full iteration ：</strong>以 0 作为游标开始一次新的迭代， 一直调用 SCAN 命令， 直到命令返回游标 0 ， 我们称这个过程为一次完整遍历。</p>
+		<p> <strong>full iteration ：</strong>以 0 作为游标开始一次新的迭代， 一直调用 SCAN 命令， 直到命令返回游标 0 ， 我们称这个过程为一次完整遍历。</p>
         
         <h2>Scan命令的保证</h2>
         
@@ -106,9 +106,9 @@
         
         <pre><code>redis 127.0.0.1:6379&gt; sadd myset 1 2 3 foo foobar feelsgood&#x000A;(integer) 6&#x000A;redis 127.0.0.1:6379&gt; sscan myset 0 match f*&#x000A;1) &quot;0&quot;&#x000A;2) 1) &quot;foo&quot;&#x000A;   2) &quot;feelsgood&quot;&#x000A;   3) &quot;foobar&quot;&#x000A;redis 127.0.0.1:6379&gt;&#x000A;</code></pre>
         
-		    <p><strong>MATCH</strong>功能对元素的模式匹配工作是在命令从数据集中取出元素后和向客户端返回元素前的这段时间内进行的， 所以如果被迭代的数据集中只有少量元素和模式相匹配， 那么迭代命令或许会在多次执行中都不返回任何元素。</p>
+		<p><strong>MATCH</strong>功能对元素的模式匹配工作是在命令从数据集中取出元素后和向客户端返回元素前的这段时间内进行的， 所以如果被迭代的数据集中只有少量元素和模式相匹配， 那么迭代命令或许会在多次执行中都不返回任何元素。</p>
 		
-	    	<p> 以下是这种情况的一个例子:</p>
+		<p> 以下是这种情况的一个例子:</p>
         
         <pre><code>redis 127.0.0.1:6379&gt; scan 0 MATCH *11*&#x000A;1) &quot;288&quot;&#x000A;2) 1) &quot;key:911&quot;&#x000A;redis 127.0.0.1:6379&gt; scan 288 MATCH *11*&#x000A;1) &quot;224&quot;&#x000A;2) (empty list or set)&#x000A;redis 127.0.0.1:6379&gt; scan 224 MATCH *11*&#x000A;1) &quot;80&quot;&#x000A;2) (empty list or set)&#x000A;redis 127.0.0.1:6379&gt; scan 80 MATCH *11*&#x000A;1) &quot;176&quot;&#x000A;2) (empty list or set)&#x000A;redis 127.0.0.1:6379&gt; scan 176 MATCH *11* COUNT 1000&#x000A;1) &quot;0&quot;&#x000A;2)  1) &quot;key:611&quot;&#x000A;    2) &quot;key:711&quot;&#x000A;    3) &quot;key:118&quot;&#x000A;    4) &quot;key:117&quot;&#x000A;    5) &quot;key:311&quot;&#x000A;    6) &quot;key:112&quot;&#x000A;    7) &quot;key:111&quot;&#x000A;    8) &quot;key:110&quot;&#x000A;    9) &quot;key:113&quot;&#x000A;   10) &quot;key:211&quot;&#x000A;   11) &quot;key:411&quot;&#x000A;   12) &quot;key:115&quot;&#x000A;   13) &quot;key:116&quot;&#x000A;   14) &quot;key:114&quot;&#x000A;   15) &quot;key:119&quot;&#x000A;   16) &quot;key:811&quot;&#x000A;   17) &quot;key:511&quot;&#x000A;   18) &quot;key:11&quot;&#x000A;redis 127.0.0.1:6379&gt;&#x000A;</code></pre>
         
