@@ -3,15 +3,15 @@
 
 备注格式如下:
 
-地址         			昵称    预计完成时间  当前状态
-/index.html			geelou    2013-10-10    已更新
-/commands/dump.html     	阿昊      2013-09-29    已更新
-/commands/expireat.html 	阿昊      2013-09-29    已更新
-/commands/migrate.html.html     阿昊      2013-09-29    已更新
-/commands/Lists的所有command    A-wu    2013-10-31    已更新
-/commands/set的余下命令        breakwang  2013-12-04    已更新 
-/topics/data-types.html        jerrypy    2013-12-01   翻译完成
-/topics/config.html            skywalker  2013-12-04  翻译中
+地址                      			昵称     预计完成时间   当前状态
+/index.html			                geelou    2013-10-10     已更新
+/commands/dump.html     	      阿昊      2013-09-29     已更新
+/commands/expireat.html 	      阿昊      2013-09-29     已更新
+/commands/migrate.html.html     阿昊      2013-09-29     已更新
+/commands/Lists的所有command    A-wu      2013-10-31     已更新
+/commands/set的余下命令        breakwang  2013-12-04     已更新 
+/topics/data-types.html        jerrypy    2013-12-01    翻译完成
+/topics/config.html            skywalker  2013-12-04     翻译中
 /topics/persistence.html       breakwang  2013-12-09     已更新
 /commands/persist.html          阿昊      2013-12-16     已更新
 /commands/pexpire.html          阿昊      2013-12-16     已更新
@@ -21,5 +21,6 @@
 /commands/restore.html          阿昊      2013-12-16     已更新
 /commands/ttl.html              阿昊      2013-12-16     已更新
 /commands/type.html             阿昊      2013-12-16     已更新
-/topics/sentinel.html		  breakwang   2014-01-06     翻译中
+/topics/sentinel.html		      breakwang   2014-01-06     翻译中
+/commands/sacn.html           HongKi      2014-03-03     已更新
 
