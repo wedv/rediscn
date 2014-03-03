@@ -3,7 +3,7 @@
 
 备注格式如下:
 
-地址					昵称                    预计完成时间	         当前状态
+地址					昵称                    预计完成时间	        当前状态
 /index.html				geelou 	 		2013-10-10		已更新
 /commands/dump.html			阿昊	 		2013-09-29		已更新
 /commands/expireat.html           	阿昊	 		2013-09-29		已更新
