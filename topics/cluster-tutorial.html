@@ -9,7 +9,7 @@
     <script src='/js/app.js'></script>
     <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
     <title>Redis 集群教程 -- Redis中文资料站</title>
-	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+	<meta http-equiv="description" content="Redis 集群教程，redis官方cluster（集群）现在已经是beta版，很快我们会有beta2,如果你打算使用并深入了解Redis集群,推荐阅读完本章节后,仔细阅读Redis 集群规范。" />
   </head>
   <body class=''>
     <script src='/js/head.js'></script>
@@ -167,7 +167,7 @@
         
         <pre><code>     1  require &#39;./cluster&#39;&#x000A;     2&#x000A;     3  startup_nodes = [&#x000A;     4      {:host =&gt; &quot;127.0.0.1&quot;, :port =&gt; 7000},&#x000A;     5      {:host =&gt; &quot;127.0.0.1&quot;, :port =&gt; 7001}&#x000A;     6  ]&#x000A;     7  rc = RedisCluster.new(startup_nodes,32,:timeout =&gt; 0.1)&#x000A;     8&#x000A;     9  last = false&#x000A;    10&#x000A;    11  while not last&#x000A;    12      begin&#x000A;    13          last = rc.get(&quot;__last__&quot;)&#x000A;    14          last = 0 if !last&#x000A;    15      rescue =&gt; e&#x000A;    16          puts &quot;error #{e.to_s}&quot;&#x000A;    17          sleep 1&#x000A;    18      end&#x000A;    19  end&#x000A;    20&#x000A;    21  ((last.to_i+1)..1000000000).each{|x|&#x000A;    22      begin&#x000A;    23          rc.set(&quot;foo#{x}&quot;,x)&#x000A;    24          puts rc.get(&quot;foo#{x}&quot;)&#x000A;    25          rc.set(&quot;__last__&quot;,x)&#x000A;    26      rescue =&gt; e&#x000A;    27          puts &quot;error #{e.to_s}&quot;&#x000A;    28      end&#x000A;    29      sleep 0.1&#x000A;    30  }&#x000A;</code></pre>
         
-        <p>这个应用所做的工作非常简单： 它不断地以 foo<number> 为键， number 为值， 使用 SET 命令向数据库设置键值对:</p>
+        <p>这个应用所做的工作非常简单： 它不断地以 foo&lt;number&gt; 为键， number 为值， 使用 SET 命令向数据库设置键值对:</p>
         
         <ul>
         <li>SET foo0 0</li>
