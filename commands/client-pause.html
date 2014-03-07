@@ -29,7 +29,30 @@
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
            
         </div>
-      	<p>See <a href="/commands/scan.html">SCAN</a> for <a href="/commands/hscan.html">HSCAN</a> documentation.</p>
+      	 <p><code>CLIENT PAUSE</code> is a connections control command able to suspend all the Redis clients for the specified amount of time (in milliseconds).</p>
+        
+        <p>The command performs the following actions:</p>
+        
+        <ul>
+        <li>It stops processing all the pending commands from normal and pub/sub clients. However interactions with slaves will continue normally.</li>
+        <li>However it returns OK to the caller ASAP, so the <code>CLIENT PAUSE</code> command execution is not paused by itself.</li>
+        <li>When the specified amount of time has elapsed, all the clients are unblocked: this will trigger the processing of all the commands accumulated in the query buffer of every client during the pause.</li>
+        </ul>
+        
+        <p>This command is useful as it makes able to switch clients from a Redis instance to another one in a controlled way. For example during an instance upgrade the system administrator could do the following:</p>
+        
+        <ul>
+        <li>Pause the clients using <code>CLIENT PAUSE</code></li>
+        <li>Wait a few seconds to make sure the slaves processed the latest replication stream from the master.</li>
+        <li>Turn one of the slaves into a master.</li>
+        <li>Reconfigure clients to connect with the new master.</li>
+        </ul>
+        
+        <p>It is possible to send <code>CLIENT PAUSE</code> in a MULTI/EXEC block together with the <code>INFO replication</code> command in order to get the current master offset at the time the clients are blocked. This way it is possible to wait for a specific offset in the slave side in order to make sure all the replication stream was processed.</p>
+        
+        <h2>Return value</h2>
+        
+        <p><a href="/topics/protocol#simple-string-reply">Simple string reply</a>: The command returns OK or an error if the timeout is invalid.</p>
       </article>
     </div>
     

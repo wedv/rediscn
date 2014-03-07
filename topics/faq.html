@@ -8,8 +8,8 @@
     <script src='/js/jquery.min.1.4.js'></script>
     <script src='/js/app.js'></script>
     <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
-    <title>Redis中文资料站</title>
-	<meta http-equiv="description" content="redis中文资料站，下载安装redis，查找redis常用命令（commands），选择适合的redis客户端方式，配置redis主从（master-slave），阅读redis官方文档，社区里了解更多redis信息，提交redis的bug。" />
+    <title>FAQ 常见redis 问题 -- Redis中文资料站</title>
+	<meta http-equiv="description" content="FAQ 常见redis 问题，汇集大家在各个社区，交流群等经常提及的redis的一些问题，并给出简单的回答。" />
   </head>
   <body class=''>
     <script src='/js/head.js'></script>
@@ -59,7 +59,8 @@
         <p>
          	一个可行的方案是同时使用传统数据库（Mysql或者其他的）和Redis，Redis里面存放状态信息（元数据，小但经常写的信息），和所有其他读写频繁的数据：用户身份验证token，
          	使用Redis List 存放与时间顺序有关的id列表、编码等等。然后使用MySQL（或其他）作为存储引擎来存放更大的数据，
-         	创建一个自增长ID作为主键和一个较大的BLOB字段作为数据字段，访问MySQL的数据只能通过主键（ID）。执行查询操作时，通过Redis读取数据，
+         	创建一个自增长ID作为主键和一个较大的BLOB字段作为数据字段，访问MySQL的数据只能通过主键（ID）
+。执行查询操作时，通过Redis读取数据，
          	但是当有读取打数据时需要通过主键（ID）访问MySQL数据库。 ，
          </p>
         
@@ -112,14 +113,16 @@
         
         <p>
          	CPU不太可能是Redis的瓶颈，一般内存和网络才有可能是。
-         	例如使用Redis的管道（pipelining）在liunx系统上运行可以达到500K的RPS(requests per second)
+         	例如使用Redis的管道（pipelining）在liunx系统上运行可以达到500K的RPS(requests per second)
+
          	，因此，如果您的应用程序主要使用<span class="math">O(N) </span>或者<span class="math">O(log(N)) </span>的
  命令，他们几乎不需要使用什么CPU。
  				</p>
         
         <p>
         	然而，为了最大限度的使用CPU，可以在同一个服务器部署多个Redis的实例，并把他们当作不同的服务器来使用，在某些时候，无论如何一个服务器是不够的，
-        </p> 所以，如果你想使用多个CPU，你可以考虑一下分片（shard）。。
+        </p> 所以，如果你想使用多个CPU，你可以考虑一下分片（shard）
+。。
         
         <p>在Redis的客户端类库里面，比如RB（Ruby的客户端）和Predis（最常用的PHP客户端之一），能够使用一致性哈希（consistent hashing）来处理多个Redis实例。</p>
         

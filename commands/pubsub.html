@@ -29,7 +29,48 @@
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
            
         </div>
-      	<p>See <a href="/commands/scan.html">SCAN</a> for <a href="/commands/hscan.html">HSCAN</a> documentation.</p>
+      	<p>The PUBSUB command is an introspection command that allows to inspect the
+        state of the Pub/Sub subsystem. It is composed of subcommands that are
+        documented separately. The general form is:</p>
+        
+        <pre><code>PUBSUB &lt;subcommand&gt; ... args ...&#x000A;</code></pre>
+        
+        <h1>PUBSUB CHANNELS [pattern]</h1>
+        
+        <p>Lists the currently <em>active channels</em>. An active channel is a Pub/Sub channel
+        with one ore more subscribers (not including clients subscribed to patterns).</p>
+        
+        <p>If no <code>pattern</code> is specified, all the channels are listed, otherwise if pattern
+        is specified only channels matching the specified glob-style pattern are
+        listed.</p>
+        
+        <h2>Return value</h2>
+        
+        <p><a href="/topics/protocol#array-reply">Array reply</a>: a list of active channels, optionally matching the specified pattern.</p>
+        
+        <h1>PUBSUB NUMSUB [channel-1 ... channel-N]</h1>
+        
+        <p>Returns the number of subscribers (not counting clients subscribed to patterns)
+        for the specified channels.</p>
+        
+        <h2>Return value</h2>
+        
+        <p><a href="/topics/protocol#array-reply">Array reply</a>: a list of channels and number of subscribers for every channel. The format is channel, count, channel, count, ..., so the list is flat.
+        The order in which the channels are listed is the same as the order of the
+        channels specified in the command call.</p>
+        
+        <p>Note that it is valid to call this command without channels. In this case it
+        will just return an empty list.</p>
+        
+        <h1>PUBSUB NUMPAT</h1>
+        
+        <p>Returns the number of subscriptions to patterns (that are performed using the
+        <a href="/commands/psubscribe">PSUBSCRIBE</a> command). Note that this is not just the count of clients subscribed
+        to patterns but the total number of patterns all the clients are subscribed to.</p>
+        
+        <h2>Return value</h2>
+        
+        <p><a href="/topics/protocol#integer-reply">Integer reply</a>: the number of patterns all the clients are subscribed to.</p>
       </article>
     </div>
     
