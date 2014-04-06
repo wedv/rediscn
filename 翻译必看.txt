@@ -22,5 +22,5 @@
 /commands/ttl.html              阿昊      2013-12-16     已更新
 /commands/type.html             阿昊      2013-12-16     已更新
 /topics/sentinel.html		  breakwang   2014-01-06     翻译中
-/topics/benchmarks.html         alswl     2014-02-23     翻译中
+/topics/benchmarks.html         alswl     2014-02-23     已更新
 
