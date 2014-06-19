@@ -23,6 +23,7 @@
 /commands/type.html			阿昊	 		2013-12-16		已更新
 /topics/sentinel.html			breakwang		2014-01-06		翻译中
 /commands/sacn.html			HongKi	 		2014-03-03		已更新
-/topics/clients.html			xiaoy	 		2014-06-10		翻译中
+/topics/clients.html			xiaoy	 		2014-06-10		已更新
+/topics/security.html			xiaoy	 		2014-06-10		已更新
 
 
