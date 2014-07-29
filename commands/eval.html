@@ -143,7 +143,7 @@
         	最后一个例子展示如果是Lua直接命令调用它是如何可以从<code>redis.call()</code>或<code>redis.pcall()</code>接收到准确的返回值。
         </p>
         
-        <p>下面的列子我们可以看到浮点数和nil将怎么样处理：</p>
+        <p>下面的例子我们可以看到浮点数和nil将怎么样处理：</p>
         
         <pre><code>&gt; eval &quot;return {1,2,3.3333,&#39;foo&#39;,nil,&#39;bar&#39;}&quot; 0&#x000A;1) (integer) 1&#x000A;2) (integer) 2&#x000A;3) (integer) 3&#x000A;4) &quot;foo&quot;&#x000A;</code></pre>
         
