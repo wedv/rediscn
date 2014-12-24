@@ -5,8 +5,8 @@ function hiddenAddiv(){
 }
 
 var adTHML = "";
-adTHML += "     <div id='showaddiv' style='display:;' class='text columns home sidebar'>";
-adTHML += "          <img src='/images/newYear2014.jpg' />";
+adTHML += "     <div id='showaddiv' style='display:;margin: 0 auto;max-width: 900px;' class='columns home sidebar'>";
+adTHML += "          <img src='/images/christmas.jpg' />";
 adTHML += "      </div>";
 document.write(adTHML);
 
