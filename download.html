@@ -39,10 +39,11 @@
           </tr>
          <tr>
             <td>3.0.0</td>
-            <td>Beta</td>
-            <td>This is the first beta of Redis 3.0.0.
-            Redis 3.0 features support for <a href="/topics/cluster-tutorial.html">Redis Cluster</a> and important speed improvements under certain workloads. This is a developers preview and is not suitable for production environments. The next beta scheduled for 11 March 2014. For the complete list of new features, please check the <a href="https://github.com/antirez/redis/raw/3.0/00-RELEASENOTES">Release Notes</a>.
+            <td>RC-2</td>
+            <td>This is the second (likely the last) release candidate of Redis 3.0.0.
+            Redis 3.0 features support for <a href="/topics/cluster-tutorial.html">Redis Cluster</a> and important speed improvements under certain workloads. This is a developers preview and is not suitable for production environments. The stable release is scheduled for the first days of February 2015. For the complete list of new features, please check the <a href="https://github.com/antirez/redis/raw/3.0/00-RELEASENOTES" target="_blank">Release Notes</a>.
             <br>
+          </td>
             <td>
               <a href="https://github.com/antirez/redis/archive/3.0.0-beta1.tar.gz">Download</a>
             </td>
@@ -71,10 +72,11 @@
           </tr>
         
           <tr>
-            <td>Win32/64</td>
+            <td>Win64</td>
             <td>Unofficial</td>
-            <td>Redis的项目不直接支持windows，但是微软开源团队开发和维护着一个<a href="https://github.com/MSOpenTech/redis" target="_blank">Win32/64版本的Redis</a>.
-        	  目前他们还不适合线上使用，可以用于开发环境中使用，我们期待和他们的作者合作，但是<a href="http://antirez.com/post/redis-win32-msft-patch.html" target="_blank"s>我们不会把它合并到版本管理里面</a>.
+            <td>
+            	Redis的项目不直接支持windows，但是微软开源团队开发和维护着一个<a href="https://github.com/MSOpenTech/redis" target="_blank">Win64版本的Redis</a>.
+            </td>	
             <td>
               <a href="https://github.com/MSOpenTech/redis">Clone</a>
             </td>
@@ -84,6 +86,13 @@
         
         <p>其他下载地址<a href="https://github.com/antirez/redis/downloads">GitHub</a>
         ， <a href="http://code.google.com/p/redis/downloads/list?can=1">Google Code</a>。</p>
+        
+        <p><strong>Scripts and other automatic downloads</strong> can easily access the tarball of the latest Redis stable version at <a href="http://download.redis.io/redis-stable.tar.gz" target="_blank">http://download.redis.io/redis-stable.tar.gz</a>. The source code of the latest stable release is <a href="http://download.redis.io/redis-stable" target="_blank">always browsable here</a>, use the file <strong>src/version.h</strong> in order to extract the version in an automatic way.</p>
+        
+        <h1>如何验证文件的完整性</h1>
+        
+        <p>The Github repository <a href="https://github.com/antirez/redis-hashes/blob/master/README" target="_blank">redis-hashes</a> contains a README file with SHA1 digests of released tarball archives.</p>
+        
         
         <h1>安装</h1>
         
@@ -101,9 +110,7 @@
         
         <p>你是不是刚刚接触使用Redis?试试我们的<a href="http://try.redis-db.com" target="_blank">在线互动教程</a>吧。</p>
         
-        <h2>Redis集群在哪里？</h2>
         
-        <p>Redis Cluster, the distributed version of Redis, is making a lot of progresses and will be released as beta at the start of Q3 2013, and in a stable release before the end of 2013. You can <a href="https://vimeo.com/63672368">watch a video about what Redis Cluster can currently do</a>. The source code of Redis Cluster is publicly available in the <code>unstable</code> branch, check the <code>cluster.c</code> source code.</p>
       </article>
     </div>
     

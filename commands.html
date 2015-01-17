@@ -24,6 +24,7 @@
         <a href='#list'>列表（Lists）</a>
         <a href='#set'>集合（Sets）</a>
         <a href='#sorted_set'>有序集合（Sorted Sets）</a><br/>
+        <a href='#hyperLogLog'>HyperLogLog</a>
         <a href='#pubsub'>发布/订阅（Pub/Sub）</a>
         <a href='#transactions'>事务（Transactions）</a>
         <a href='#scripting'>脚本（Scripting）</a>
@@ -112,6 +113,9 @@
 			showCommandsHtmlItem('persist');
 			showCommandsHtmlItem('pexpire');
 			showCommandsHtmlItem('pexpireat');
+			showCommandsHtmlItem('pfadd');
+			showCommandsHtmlItem('pfcount');
+			showCommandsHtmlItem('pfmerge');
 			showCommandsHtmlItem('ping');
 			showCommandsHtmlItem('psetex');
 			showCommandsHtmlItem('psubscribe');
@@ -196,7 +200,7 @@ client-setname,config-get,config-set,config-resetstat,dbsize,debug-object,debug-
 dump,echo,eval,evalsha,exec,exists,expire,expireat,flushall,flushdb,get,getbit,getrange,getset,hdel,hexists,hget,
 hgetall,hincrby,hincrbyfloat,hkeys,hlen,hmget,hmset,hset,hsetnx,hvals,incr,incrby,incrbyfloat,info,keys,lastsave,
 lindex,linsert,llen,lpop,lpush,lpushx,lrange,lrem,lset,ltrim,mget,migrate,monitor,move,mset,msetnx,multi,object,
-persist,pexpire,pexpireat,ping,psetex,psubscribe,pttl,publish,punsubscribe,quit,randomkey,rename,renamenx,restore,
+persist,pexpire,pexpireat,pfadd,pfcount,pfmerge,ping,psetex,psubscribe,pttl,publish,punsubscribe,quit,randomkey,rename,renamenx,restore,
 rpop,rpoplpush,rpush,rpushx,sadd,save,scard,script-exists,script-flush,script-kill,script-load,sdiff,sdiffstore,
 select,set,setbit,setex,setnx,setrange,shutdown,sinter,sinterstore,sismember,slaveof,slowlog,smembers,smove,sort,
 spop,srandmember,srem,strlen,subscribe,sunion,sunionstore,sync,time,ttl,type,unsubscribe,unwatch,watch,zadd,zcard,
