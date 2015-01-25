@@ -34,7 +34,7 @@
         
         <p>当参数为多个key时，返回这些HyperLogLog并集的近似基数，这个值是将所给定的所有key的HyperLoglog结构合并到一个临时的HyperLogLog结构中计算而得到的.</p>
         
-        <p>HyperLogLog可以使用固定且很少的内存（每个HyperLogLog结构需要12K字节再加上key本身的几个字节）来存储集合的<strong>唯一<strong>元素.</p>
+        <p>HyperLogLog可以使用固定且很少的内存（每个HyperLogLog结构需要12K字节再加上key本身的几个字节）来存储集合的<strong>唯一</strong>元素.</p>
         
         <p>返回的可见集合基数并不是精确值， 而是一个带有 0.81% 标准错误（standard error）的近似值.</p>
         
