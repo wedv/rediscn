@@ -27,28 +27,27 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-           <p><strong>时间复杂度：</strong> O(1) with every small average constant times when called with a single key. O(N) with N being the number of keys, and much bigger constant times, when called with multiple keys.</p>
+           <p><strong>时间复杂度：</strong> 使用一个key为参数时，时间复杂度为O(1)，是一个非常短的常数时间，当参数为多个key时，时间复杂度为O(N),N为给定keys的个数，同时这个常数时间值也会比单个key所用的时间长很多.</p>
         </div> 
         
-        <p>When called with a single key, returns the approximated cardinality computed by the HyperLogLog data structure stored at the specified variable, which is 0 if the variable does not exist.</p>
+        <p>当参数为一个key时,返回存储在HyperLogLog结构体的该变量的近似基数，如果该变量不存在,则返回0.</p>
         
-        <p>When called with multiple keys, returns the approximated cardinality of the union of the HyperLogLogs passed, by internally merging the HyperLogLogs stored at the provided keys into a temporary hyperLogLog.</p>
+        <p>当参数为多个key时，返回这些HyperLogLog并集的近似基数，这个值是将所给定的所有key的HyperLoglog结构合并到一个临时的HyperLogLog结构中计算而得到的.</p>
         
-        <p>The HyperLogLog data structure can be used in order to count <strong>unique</strong> elements in a set using just a small constant amount of memory, specifically 12k bytes for every HyperLogLog (plus a few bytes for the key itself).</p>
+        <p>HyperLogLog可以使用固定且很少的内存（每个HyperLogLog结构需要12K字节再加上key本身的几个字节）来存储集合的<strong>唯一<strong>元素.</p>
         
-        <p>The returned cardinality of the observed set is not exact, but approximated with a standard error of 0.81%.</p>
+        <p>返回的可见集合基数并不是精确值， 而是一个带有 0.81% 标准错误（standard error）的近似值.</p>
         
-        <p>For example in order to take the count of all the unique search queries performed in a day, a program needs to call <a href="/commands/pfadd.html">PFADD</a> every time a query is processed. The estimated number of unique queries can be retrieved with <a href="/commands/pfcount.html">PFCOUNT</a> at any time.</p>
+        <p>例如为了记录一天会执行多少次各不相同的搜索查询， 一个程序可以在每次执行搜索查询时调用一次<a href="/commands/pfadd.html">PFADD</a> ， 并通过调用 <a href="/commands/pfcount.html">PFCOUNT</a> 命令来获取这个记录的近似结果.</p>
         
-        <p>Note: as a side effect of calling this function, it is possible that the HyperLogLog is modified, since the last 8 bytes encode the latest computed cardinality
-        for caching purposes. So <a href="/commands/pfcount.html">PFCOUNT</a> is technically a write command.</p>
+        <p>注意: 这个命令的一个副作用是可能会导致HyperLogLog内部被更改，出于缓存的目的,它会用8字节的来记录最近一次计算得到基数,所以<a href="/commands/pfcount.html">PFCOUNT</a>命令在技术上是个写命令.</p>
         
         <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#integer-reply">Integer reply</a>, specifically:</p>
+        <p><a href="/topics/protocol.html#integer-reply"></a>指定的整数返回:</p>
         
         <ul>
-        <li>The approximated number of unique elements observed via <a href="/commands/pfadd.html">PFADD</a>.</li>
+        <li> <a href="/commands/pfadd.html">PFADD</a>添加的唯一元素的近似数量.</li>
         </ul>
         
         <h2>例子</h2>
@@ -77,35 +76,16 @@
           </form></div>
         
         
-        <h2>Performances</h2>
+        <h2>性能</h2>
         
-        <p>When <a href="/commands/pfcount.html">PFCOUNT</a> is called with a single key, performances are excellent even if
-        in theory constant times to process a dense HyperLogLog are high. This is
-        possible because the <a href="/commands/pfcount.html">PFCOUNT</a> uses caching in order to remember the cardinality
-        previously computed, that rarely changes because most <a href="/commands/pfadd.html">PFADD</a> operations will
-        not update any register. Hundreds of operations per second are possible.</p>
+        <p>当调用 <a href="/commands/pfcount.html">PFCOUNT</a> 命令时指定一个key为参数,性能表现很好，甚至和处理一个HyperLogLog所需要的时间一样短.这可能和<a href="/commands/pfcount.html">PFCOUNT</a>命令能够直接使用缓存的的估计基数有关，大多数的<a href="/commands/pfadd.html">PFADD</a> 也不会更新任何寄存器，所以这个值也很少被更改.理论上能达到每秒几百次操作.</p>
         
-        <p>When <a href="/commands/pfcount.html">PFCOUNT</a> is called with multiple keys, an on-the-fly merge of the
-        HyperLogLogs is performed, which is slow, moreover the cardinality of the union
-        can&#39;t be cached, so when used with multiple keys <a href="/commands/pfcount.html">PFCOUNT</a> may take a time in
-        the order of magnitude of the millisecond, and should be not abused.</p>
+        <p>当调用 <a href="/commands/pfcount.html">PFCOUNT</a> 命令时指定多个key,由于要在多个HperLogLog结构中执行一比较慢合并操作,而且这个通过并集计算得到的基数是不能够被缓存,  <a href="/commands/pfcount.html">PFCOUNT</a>命令还要消耗毫秒量级的时间来进行多个key的并集操作，消耗的时间会比较长一些，所以不要滥用这种多个key的方式.</p>
         
-        <p>The user should take in mind that single-key and multiple-keys executions of
-        this command are semantically different and have different performances.</p>
+        <p>使用者需要明白这个命令来处理1个key和多个key执行的语义是不同的，并且执行的性能也不相同.</p>
         
-        <h2>HyperLogLog representation</h2>
         
-        <p>Redis HyperLogLogs are represented using a double representation: the <em>sparse</em> representation suitable for HLLs counting a small number of elements (resulting in a small number of registers set to non-zero value), and a <em>dense</em> representation suitable for higher cardinalities. Redis automatically switches from the sparse to the dense representation when needed.</p>
-        
-        <p>The sparse representation uses a run-length encoding optimized to store efficiently a big number of registers set to zero. The dense representation is a Redis string of 12288 bytes in order to store 16384 6-bit counters. The need for the double representation comes from the fact that using 12k (which is the dense representation memory requirement) to encode just a few registers for smaller cardinalities is extremely suboptimal.</p>
-        
-        <p>Both representations are prefixed with a 16 bytes header, that includes a magic, an encoding / version fiend, and the cached cardinality estimation computed, stored in little endian format (the most significant bit is 1 if the estimation is invalid since the HyperLogLog was updated since the cardinality was computed).</p>
-        
-        <p>The HyperLogLog, being a Redis string, can be retrieved with <a href="/commands/get.html">GET</a> and restored with <a href="/commands/set.html">SET</a>. Calling <a href="/commands/pfadd.html">PFADD</a>, <a href="/commands/pfcount.html">PFCOUNT</a> or <a href="/commands/pfmerge.html">PFMERGE</a> commands with a corrupted HyperLogLog is never a problem, it may return random values but does not affect the stability of the server. Most of the times when corrupting a sparse representation, the server recognizes the corruption and returns an error.</p>
-        
-        <p>The representation is neutral from the point of view of the processor word size and endianess, so the same representation is used by 32 bit and 64 bit processor, big endian or little endian.</p>
-        
-        <p>More details about the Redis HyperLogLog implementation can be found in <a href="http://antirez.com/news/75" target="_blank">this blog post</a>. The source code of the implementation in the <code>hyperloglog.c</code> file is also easy to read and understand, and includes a full specification for the exact encoding used for the sparse and dense representations.</p>
+        <p>更多的信息请参考<a href="http://antirez.com/news/75" target="_blank">这篇文章</a>. 源代码 <code>hyperloglog.c</code>文件也很简单易理解， 包含了稀松与密集两种实现的编码.</p>
       </article>
     </div>
     
