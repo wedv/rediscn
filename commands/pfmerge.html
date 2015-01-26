@@ -27,18 +27,15 @@
         
         <div class='metadata'>
           <p><strong>加入版本 <span id='command_ver_span'></span>。</strong></p>
-           <p><strong>时间复杂度：</strong> O(N) to merge N HyperLogLogs, but with high constant times.</p>
+           <p><strong>时间复杂度：</strong> O(N) 其中 N 为被合并的 HyperLogLog 数量, 这个不过程时间会比较长.</p>
         </div> 
-        <p>Merge multiple HyperLogLog values into an unique value that will approximate
-        the cardinality of the union of the observed Sets of the source HyperLogLog
-        structures.</p>
+        <p>将多个 HyperLogLog 合并（merge）为一个 HyperLogLog ， 合并后的 HyperLogLog 的基数接近于所有输入 HyperLogLog 的可见集合（observed set）的并集.</p>
         
-        <p>The computed merged HyperLogLog is set to the destination variable, which is
-        created if does not exist (defauling to an empty HyperLogLog).</p>
+        <p>合并得出的 HyperLogLog 会被储存在目标变量（第一个参数）里面， 如果该键并不存在， 那么命令在执行之前， 会先为该键创建一个空的.</p>
         
         <h2>返回值</h2>
         
-        <p><a href="/topics/protocol.html#simple-string-reply">Simple string reply</a>: The command just returns <code>OK</code>.</p>
+        <p><a href="/topics/protocol.html#simple-string-reply">简单字符串返回</a>: 这个命令只会返回 <code>OK</code>.</p>
         
         <h2>例子</h2>
         
