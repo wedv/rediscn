@@ -8,109 +8,135 @@
     <script src='/js/jquery.min.1.4.js'></script>
     <script src='/js/app.js'></script>
     <meta content='width=device-width, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
-    <title>REDIS 2.8.19 下载 -- Redis中文资料站</title>
-	<meta http-equiv="description" content="redis下载中心，下载各种版本的redis，包括最新redis 2.8.19稳定版redid,3.0.0-Beta版本以及win32/64版本" />
+    <title>REDIS 3.0.0 下载 -- Redis中文资料站</title>
+	<meta http-equiv="description" content="redis下载中心，下载各种版本的redis，包括最新redis 3.0.0稳定版redid,3.0.0-Beta版本以及win32/64版本" />
 	
   </head>
   <body class=''>
     <script src='/js/head.js'></script>
     <div class='text'>
       <article id='topic'>
-        <h1>REDIS下载</h1>
-        
-        <p>Redis 使用标准的
-        <strong>major.minor.patchlevel</strong>版本做法。
-        <strong>stable</strong>表示稳定版本，一般用偶数版本，如：1.2, 2.0, 2.2, 2.4, 2.6,2.8。
-         奇数标识不稳定版本，如：2.9.x，他未来的稳定版本是3.0。
-         </p>
-        
-        <table class="versions">
-      
-          <tr class="current">
-            <td>2.8.19</td>
-            <td>稳定版</td>
-            <td>
-             	Redis 2.8显著改善了如:复制同步部分，支持IPv6,配置重写，密钥空间修改通知Pub/Sub等等，更多修改请查看
-            <a href="https://github.com/antirez/redis/raw/2.8/00-RELEASENOTES" target="_blank">发布日志</a>。
-            <br>
-            <td>
-              <a href="http://download.redis.io/releases/redis-2.8.19.tar.gz">下载</a>
-            </td>
-          </tr>
-         <tr>
-            <td>3.0.0</td>
-            <td>RC-2</td>
-            <td>This is the second (likely the last) release candidate of Redis 3.0.0.
-            Redis 3.0 features support for <a href="/topics/cluster-tutorial.html">Redis Cluster</a> and important speed improvements under certain workloads. This is a developers preview and is not suitable for production environments. The stable release is scheduled for the first days of February 2015. For the complete list of new features, please check the <a href="https://github.com/antirez/redis/raw/3.0/00-RELEASENOTES" target="_blank">Release Notes</a>.
-            <br>
-          </td>
-            <td>
-              <a href="https://github.com/antirez/redis/archive/3.0.0-beta1.tar.gz">Download</a>
-            </td>
-          </tr>
-          <tr>
-            <td>2.6.17</td>
-            <td>旧版本</td>
-            <td>
-             	这是Redis 2.4的最新替换版本，相比2.4版本Redis 2.6 支持<a href="/commands/eval.html">Lua 脚本</a>，毫秒级的过期时间，并且提高了内存的使用，允许无限的客户端连接和更高效的AOF更好的性能，以及一些新的命令和功能。
-             	有关2.6版本的完整信息，请查看<a href="https://github.com/antirez/redis/raw/2.6/00-RELEASENOTES">发布日志</a>。
-            
-            <br>
-            </td>
-            <td>
-              <a href="http://download.redis.io/releases/redis-2.6.17.tar.gz">下载</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td>Unstable</td>
-            <td>Unstable</td>
-            <td>这是开发过程中产生的版本，仅供黑客级别学习研究。
-            <td>
-              <a href="https://github.com/antirez/redis/tree/unstable">Clone</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td>Win64</td>
-            <td>Unofficial</td>
-            <td>
-            	Redis的项目不直接支持windows，但是微软开源团队开发和维护着一个<a href="https://github.com/MSOpenTech/redis" target="_blank">Win64版本的Redis</a>.
-            </td>	
-            <td>
-              <a href="https://github.com/MSOpenTech/redis">Clone</a>
-            </td>
-          </tr>
-        
-        </table>
-        
-        <p>其他下载地址<a href="https://github.com/antirez/redis/downloads">GitHub</a>
-        ， <a href="http://code.google.com/p/redis/downloads/list?can=1">Google Code</a>。</p>
-        
-        <p><strong>Scripts and other automatic downloads</strong> can easily access the tarball of the latest Redis stable version at <a href="http://download.redis.io/redis-stable.tar.gz" target="_blank">http://download.redis.io/redis-stable.tar.gz</a>. The source code of the latest stable release is <a href="http://download.redis.io/redis-stable" target="_blank">always browsable here</a>, use the file <strong>src/version.h</strong> in order to extract the version in an automatic way.</p>
-        
-        <h1>如何验证文件的完整性</h1>
-        
-        <p>The Github repository <a href="https://github.com/antirez/redis-hashes/blob/master/README" target="_blank">redis-hashes</a> contains a README file with SHA1 digests of released tarball archives.</p>
-        
-        
-        <h1>安装</h1>
-        
-        <p>下载，解压和安装：</p>
-        
-        <pre><code>$ wget http://download.redis.io/releases/redis-2.8.19.tar.gz&#x000A;$ tar xzf redis-2.8.19.tar.gz&#x000A;$ cd redis-2.8.19&#x000A;$ make&#x000A;</code></pre>
-        
-        <p>编译后的可执行文件在src目录中，可以使用下面的命令运行Redis:</p>
-        
-        <pre><code>$ src/redis-server&#x000A;</code></pre>
-        
-        <p>你可以使用内置的客户端连接Redis:</p>
-        
-        <pre><code>$ src/redis-cli&#x000A;redis&gt; set foo bar&#x000A;OK&#x000A;redis&gt; get foo&#x000A;&quot;bar&quot;&#x000A;</code></pre>
-        
-        <p>你是不是刚刚接触使用Redis?试试我们的<a href="http://try.redis-db.com" target="_blank">在线互动教程</a>吧。</p>
-        
-        
+        <div class='text'>
+          <span id="download" class=anchor></span><h1 ><a href="#download" class=anchor-link>*</a>下载</h1>
+          <p>
+            Redis uses a standard practice for its versioning:
+            <strong>major.minor.patchlevel</strong>.
+            An even
+            <strong>minor</strong>
+            marks a
+            <strong>stable</strong>
+            release, like 1.2, 2.0, 2.2, 2.4, 2.6,
+            2.8. Odd minors are used for
+            <strong>unstable</strong>
+            releases, for example 2.9.x releases
+            are the unstable versions of what will be Redis 3.0 once stable.
+          </p>
+          <ul class='download-versions'>
+            <li>
+              <h2>
+                Stable
+                <span class='download-version'>(3.0)</span>
+              </h2>
+              Redis 3.0 introduces Redis Cluster, a distributed implementation of Redis with automatic data sharding and fault tolerance, important speed improvements under certain workloads, improved AOF rewriting, and more.
+              <div class='download-links'>
+                <a class='download-link' href='https://raw.githubusercontent.com/antirez/redis/3.0/00-RELEASENOTES'>
+                  <i class='fa fa-file-text-o'></i>
+                  Release notes
+                </a>
+                <a class='download-link' href='http://download.redis.io/releases/redis-3.0.0.tar.gz'>
+                  <i class='fa fa-arrow-circle-o-down'></i>
+                  Download
+                  3.0.0
+                </a>
+              </div>
+            </li>
+            <li>
+              <h2>
+                Old
+                <span class='download-version'>(2.8)</span>
+              </h2>
+              Redis 2.8 is the older stable version of Redis. Compared to 2.6, it provided significant improvements like replication partial resynchronization, IPv6 support, config rewriting, keyspace changes notifications via Pub/Sub, and more.
+              <div class='download-links'>
+                <a class='download-link' href='https://raw.githubusercontent.com/antirez/redis/2.8/00-RELEASENOTES'>
+                  <i class='fa fa-file-text-o'></i>
+                  Release notes
+                </a>
+                <a class='download-link' href='https://github.com/antirez/redis/archive/2.8.19.tar.gz'>
+                  <i class='fa fa-arrow-circle-o-down'></i>
+                  Download
+                  2.8.19
+                </a>
+              </div>
+            </li>
+            <li>
+              <h2>
+                Unstable
+              </h2>
+              This is where all the development happens. Only for hard-core hackers. Use only if you need to test the latest features or performance improvements. In a coulpe of months this is going to be freezed, and used as the base for 3.2.
+              <div class='download-links'>
+                <a class='download-link' href='https://github.com/antirez/redis/archive/unstable.tar.gz'>
+                  <i class='fa fa-arrow-circle-o-down'></i>
+                  Download
+                  unstable
+                </a>
+              </div>
+            </li>
+          </ul>
+          <span id="other-versions" class=anchor></span><h2 ><a href="#other-versions" class=anchor-link>*</a>Other versions</h2>
+          <h3>
+            Older
+            <span class='download-version'>(2.6)</span>
+          </h3>
+          Very old, you should not use Redis 2.6. Compared to 2.4 it introduced support for Lua scripting, milliseconds precision expires, improved memory usage, unlimited number of clients, improved AOF generation, better performance, a number of new commands and features.
+          <br />
+          See the
+          <a href='https://raw.githubusercontent.com/antirez/redis/2.6/00-RELEASENOTES'>
+            release notes
+          </a>
+          or
+          <a href='http://download.redis.io/releases/redis-2.6.17.tar.gz'>
+            download 2.6.17.
+          </a>
+          <h3>
+            Windows
+          </h3>
+          The Redis project does not officially support Windows. However, the Microsoft Open Tech group develops and maintains this Windows port targeting Win64.
+          <a href='https://github.com/MSOpenTech/redis'>Learn more</a>
+          <span id="other" class=anchor></span><h3 ><a href="#other" class=anchor-link>*</a>Other</h3>
+          Historical downloads are still available on
+          <a href='https://code.google.com/p/redis/downloads/list?can=1'>Google Code</a>.
+          <p>
+            <strong>Scripts and other automatic downloads</strong>
+            can easily access the tarball of the latest Redis stable version at
+            <a href='http://download.redis.io/redis-stable.tar.gz'>http://download.redis.io/redis-stable.tar.gz</a>.
+            The source code of the latest stable release is
+            <a href='http://download.redis.io/redis-stable'>always browsable here</a>,
+            use the file
+            <strong>src/version.h</strong>
+            in order to extract the version in an automatic way.
+          </p>
+          <span id="how-to-verify-files-for-integrity" class=anchor></span><h2 ><a href="#how-to-verify-files-for-integrity" class=anchor-link>*</a>How to verify files for integrity</h2>
+          <p>
+            The Github repository
+            <a href='https://github.com/antirez/redis-hashes/blob/master/README'>redis-hashes</a>
+            contains a README file with SHA1 digests of released tarball archives.
+          </p>
+          <span id="installation" class=anchor></span><h2 ><a href="#installation" class=anchor-link>*</a>Installation</h2>
+          <p>Download, extract and compile Redis with:</p>
+          <pre><code>$ wget http://download.redis.io/releases/redis-3.0.0.tar.gz&#x000A;$ tar xzf redis-3.0.0.tar.gz&#x000A;$ cd redis-3.0.0&#x000A;$ make</code></pre>
+          <p>
+            The binaries that are now compiled are available in the
+            <code>src</code>
+            directory. Run Redis with:
+          </p>
+          <pre><code>$ src/redis-server</code></pre>
+          <p>You can interact with Redis using the built-in client:</p>
+          <pre><code>$ src/redis-cli&#x000A;redis&gt; set foo bar&#x000A;OK&#x000A;redis&gt; get foo&#x000A;&quot;bar&quot;</code></pre>
+          <p>
+            Are you new to Redis? Try our
+            <a href='http://try.redis-db.com'>online, interactive tutorial</a>.
+          </p>
+        </div>
       </article>
     </div>
     
