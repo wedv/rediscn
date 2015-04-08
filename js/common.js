@@ -15,6 +15,7 @@ var cmdLists = new Array();
 var cmdSets = new Array();
 var cmdSortedSets = new Array();
 var cmdPubSub = new Array();
+var cmdHyperLogLog = new Array();
 var cmdTransactions = new Array();
 var cmdScripting = new Array();
 var cmdConnection = new Array();
@@ -125,6 +126,7 @@ cmdArr['cmdLists'] = cmdLists;
 cmdArr['cmdSets'] = cmdSets;
 cmdArr['cmdSortedSets'] = cmdSortedSets;
 cmdArr['cmdPubSub'] = cmdPubSub;
+cmdArr['cmdHyperLogLog'] = cmdHyperLogLog;
 cmdArr['cmdTransactions'] = cmdTransactions;
 cmdArr['cmdScripting'] = cmdScripting;
 cmdArr['cmdConnection'] = cmdConnection;
@@ -137,6 +139,7 @@ cmdKeyArr['cmdLists'] = 'list';
 cmdKeyArr['cmdSets'] = 'set';
 cmdKeyArr['cmdSortedSets'] = 'sorted_set';
 cmdKeyArr['cmdPubSub'] = 'pubsub';
+cmdKeyArr['cmdHyperLogLog'] = 'hyperLogLog';
 cmdKeyArr['cmdTransactions'] = 'transactions';
 cmdKeyArr['cmdScripting'] = 'scripting';
 cmdKeyArr['cmdConnection'] = 'connection';
@@ -309,6 +312,12 @@ allCmdArr['pubsub']   =cmdPubSub['pubsub'] = new Command('pubsub','PUBSUB','cmdP
 allCmdArr['punsubscribe']   =cmdPubSub['punsubscribe'] = new Command('punsubscribe','PUNSUBSCRIBE','cmdPubSub','[pattern [pattern ...]]','2.0.0','停止发布到匹配给定模式的渠道的消息听');
 allCmdArr['subscribe']   =cmdPubSub['subscribe'] = new Command('subscribe','SUBSCRIBE','cmdPubSub','channel [channel ...]','2.0.0','聆听发布途径的消息');
 allCmdArr['unsubscribe']   =cmdPubSub['unsubscribe'] = new Command('unsubscribe','UNSUBSCRIBE','cmdPubSub','[channel [channel ...]]','2.0.0','停止发布途径的消息听');
+
+// 初始化 HyperLogLog 下的所有命
+allCmdArr['pfadd']   =cmdHyperLogLog['pfadd'] = new Command('pfadd','PFADD','cmdHyperLogLog','key element [element ...]','2.8.9','Adds the specified elements to the specified HyperLogLog.');
+allCmdArr['pfcount']   =cmdHyperLogLog['pfcount'] = new Command('pfcount','PFCOUNT','cmdHyperLogLog','key [key ...]','2.8.9','Return the approximated cardinality of the set(s) observed by the HyperLogLog at key(s).');
+allCmdArr['pfmerge']   =cmdHyperLogLog['pfmerge'] = new Command('pfmerge','PFMERGE','cmdHyperLogLog','destkey sourcekey [sourcekey ...]','2.8.9','Merge N different HyperLogLogs into a single one.');
+
 
 // 初始化 script 下的所有命
 allCmdArr['eval']   =cmdScripting['eval'] = new Command('eval','EVAL','cmdScripting','script numkeys key [key ...] arg [arg ...]','2.6.0','在服务器端执行 LUA 脚本');

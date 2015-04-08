@@ -5,9 +5,9 @@ function hiddenAddiv(){
 }
 
 var adTHML = "";
-adTHML += "     <div id='showaddiv' style='display:;' class='text columns home sidebar'>";
-adTHML += "          <img src='/images/newYear2014.jpg' />";
+adTHML += "     <div id='showaddiv' style='display:;margin: 0 auto;max-width: 900px;' class='columns home sidebar'>";
+adTHML += "          <img src='/images/year2015.jpg' width='900' height='660'/>";
 adTHML += "      </div>";
 document.write(adTHML);
 
-setTimeout("hiddenAddiv()",5000);
+setTimeout("hiddenAddiv()",10000);
