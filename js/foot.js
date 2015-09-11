@@ -22,4 +22,12 @@ footHTML += '    </footer>';
 var jiathis_config = {data_track_clickback:'true'};
 footHTML += '<scr'+'ipt type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1875726" charset="utf-8"></scr'+'ipt>';
 
+
 document.write(footHTML);
+
+// 广告位
+var cpro_id = "u2307574";
+document.write('<scr'+'ipt type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/cnw.js" charset="utf-8"></scr'+'ipt>');
+
+var cpro_id = "u2307576";
+document.write('<scr'+'ipt type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js" charset="utf-8"></scr'+'ipt>');
