@@ -26,8 +26,5 @@ footHTML += '<scr'+'ipt type="text/javascript" src="http://v3.jiathis.com/code/j
 document.write(footHTML);
 
 // 广告位
-var cpro_id = "u2307574";
-document.write('<scr'+'ipt type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/cnw.js" charset="utf-8"></scr'+'ipt>');
-
-var cpro_id = "u2307576";
-document.write('<scr'+'ipt type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js" charset="utf-8"></scr'+'ipt>');
+var cpro_id = "u1919593";
+document.write('<scr'+'ipt type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/f.js" charset="utf-8"></scr'+'ipt>');
