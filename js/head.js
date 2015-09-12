@@ -20,3 +20,8 @@ headerHTML += "        </nav>";
 headerHTML += "      </div>";
 headerHTML += "    </header>";
 document.write(headerHTML);
+
+// 广告位
+var cpro_id = "u2307574";
+document.write('<scr'+'ipt type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/cnw.js" charset="utf-8"></scr'+'ipt>');
+
